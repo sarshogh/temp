@@ -1,0 +1,18 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('docker .NET5') {
+            agent {
+                sh "docker version"
+                docker { image 'mcr.microsoft.com/dotnet/sdk:5.0'}
+            }
+            steps {
+                echo '..:: Build ::..'
+                dotnet build /src -o output
+                echo '..:: Test ::..'
+                dotnet test /tests
+            }
+        }
+    }
+}

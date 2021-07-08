@@ -2,20 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Prep') {
-            steps {
-                sh "========================================"
-            }
-        }
         stage('Build') {
             steps {
-                sh "dotnet -v"
-                sh "dotnet build /src -o output"
+                sh "mkdir output"
+                dotnet build /src -o output
             }
         }
         stage('Test') {
             steps {
-                sh "dotnet test /tests"
+                dotnet test /tests
             }
         }
         stage('Deploy') {
