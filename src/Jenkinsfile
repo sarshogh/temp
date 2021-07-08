@@ -1,16 +1,50 @@
-pipeline {
-    agent any
+pipeline{
+    agent ('dotnet')
+    /*agent 'windows server'
 
+    environment {
+        dotnet ='C:\\Program Files (x86)\\dotnet\\'
+    }
+
+    triggers {
+        pollSCM 'H * * * *'
+    }
+
+    tages{
+        stage('Checkout') {
+            steps {
+               git credentialsId: 'creds',
+               url: 'https://github.com/YourAcc/YourRepoName.git/',
+               branch: 'master'
+            }
+    } */
     stages {
+        stage ('Clean workspace') {
+            steps {
+                cleanWs()
+                 /*bat "dotnet clean YourProjectPath\\Your_Project.csproj"*/
+            }
+        }
+
+        stage ('prep installations') {
+            step {
+            }
+        }
+
+        stage('Restore packages') {
+            steps {
+                // bat "dotnet restore YourProjectPath\\Your_Project.csproj"
+            }
+        }
+
         stage('Build') {
             steps {
-                sh "mkdir output"
-                dotnet build /src -o output
+                dotnet build / src - o output
             }
         }
         stage('Test') {
             steps {
-                dotnet test /tests
+                dotnet test / tests
             }
         }
         stage('Deploy') {
@@ -18,5 +52,13 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+
+        post{
+  always{
+    emailext body: "${currentBuild.currentResult}: Job   ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+    recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+    subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
     }
-}
+  }
+    }
+    }
