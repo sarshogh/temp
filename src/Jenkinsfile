@@ -4,12 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh "mkdir output"
+                dotnet build /src -o output
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                dotnet test /tests
             }
         }
         stage('Deploy') {
