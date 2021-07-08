@@ -6,23 +6,20 @@ namespace repo1_app1
     public class UnitTest1
     {
         [Fact]
-        public void SampleUnitTest1()
+        public void Test1()
         {
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine("Unit test starting...");
-            Console.WriteLine("--------------------------------------");
-            Assert.False(1 == 0);
+            Console.WriteLine("Test 1 Started");
         }
 
         [Fact]
-        public void IsUKWonFootballIn2021AgainstDenmark()
+        public void TestName()
         {
-            //Given  //Arrange
-
-            //When   // Action
-
-            //Then   // Assert
-            Assert.True(1 == 1);
+        //Given
+        
+        //When
+        
+        //Then
+        Assert.True(1==1);
         }
     }
 }
