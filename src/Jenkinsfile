@@ -4,14 +4,11 @@ pipeline {
         stage('Prep') {
             steps {
                     echo '========================================'
-                    /* dotnet --version;*/
                     sh "dotnet --version";
-                    bat "dotnet --version";
             }
         }
         stage('Build') {
             steps {
-                sh "dotnet --version"
                 sh "dotnet build /src -o output"
             }
         }
