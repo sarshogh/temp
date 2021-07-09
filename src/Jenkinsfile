@@ -1,15 +1,12 @@
 pipeline {
     agent any
-    tools {
-        dotnetsdk
-    }
     stages {
         stage('Prep') {
             steps {
-                sh "========================================"
-                dotnet5 --version;
-                dotnet --version;
-
+                    echo '========================================'
+                    /* dotnet --version;*/
+                    sh "dotnet --version";
+                    bat "dotnet --version";
             }
         }
         stage('Build') {
