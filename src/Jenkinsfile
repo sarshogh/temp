@@ -9,12 +9,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "dotnet build /src -o output"
+                sh "dotnet build ./src -o output"
             }
         }
         stage('Test') {
             steps {
-                sh "dotnet test /tests"
+                sh "dotnet test ./tests"
             }
         }
         stage('Deploy') {
